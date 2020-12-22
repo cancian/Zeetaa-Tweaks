@@ -207,23 +207,6 @@ write /dev/stune/schedtune.prefer_idle "0"
 write /dev/stune/schedtune.colocate "0"
 write /dev/stune/schedtune.sched_boost_enabled "0"
 
-# Disable Fsync
-chmod 666 /sys/module/sync/parameters/fsync_enable
-chown root /sys/module/sync/parameters/fsync_enable
-write /sys/module/sync/parameters/fsync_enable "N"
-
-chmod 666 /sys/kernel/dyn_fsync/Dyn_fsync_active
-chown root /sys/kernel/dyn_fsync/Dyn_fsync_active
-write /sys/kernel/dyn_fsync/Dyn_fsync_active "0"
-
-chmod 666 /sys/class/misc/fsynccontrol/fsync_enabled
-chown root /sys/class/misc/fsynccontrol/fsync_enabled
-write /sys/class/misc/fsynccontrol/fsync_enabled "0"
-
-chmod 666 /sys/module/sync/parameters/fsync
-chown root /sys/module/sync/parameters/fsync
-write /sys/module/sync/parameters/fsync "0"
-
 # Fs
 write /proc/sys/fs/dir-notify-enable "0"
 write /proc/sys/fs/lease-break-time "15"
