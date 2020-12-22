@@ -262,8 +262,5 @@ fi
   fi
 done
 
-echo "Extreme Profile Applied Sucefully! " > /data/data/com.zeetaa.zeetaatweaks/files/logs/log
-
-
 
 dbg "Finished with $ERR_CNT failed writes."
