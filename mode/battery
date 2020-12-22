@@ -226,10 +226,6 @@ write /proc/sys/vm/dirty_ratio "100"
 write /proc/sys/vm/dirty_writeback_centises "3200"
 write /proc/sys/vm/vfs_cache_pressure "65"
 
-# Sched Rt Tweaks
-write /proc/sys/kernel/sched_rt_period_us "100000"
-write /proc/sys/kernel/sched_rt_runtime_us "95000"
-
 # TCP Type
 sysctl -w net.ipv4.tcp_congestion_control=cubic
 
