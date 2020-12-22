@@ -170,7 +170,7 @@ write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost "70"
 
 # kgsl-3d0 No Throttling
 write /sys/class/kgsl/kgsl-3d0/throttling "0"
-write /sys/class/kgsl/kgsl-3d0/default_pwrlevel "2"
+write /sys/class/kgsl/kgsl-3d0/default_pwrlevel "1"
 
 # Scheduler
 write /sys/block/sda/queue/scheduler "cfq"
