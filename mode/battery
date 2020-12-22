@@ -241,14 +241,6 @@ echo "60" > /proc/sys/vm/vfs_cache_pressure
 echo "3000" > /proc/sys/vm/dirty_writeback_centisecs
 echo "lZ4" > /sys/block/zram0/comp_algorithm
 
-# Kcal Config
-write /sys/devices/platform/kcal_ctrl.0/kcal "248 245 245"
-write /sys/devices/platform/kcal_ctrl.0/kcal_enable "1" 
-write /sys/devices/platform/kcal_ctrl.0/kcal_sat "268" 
-write /sys/devices/platform/kcal_ctrl.0/kcal_val "256"
-write /sys/devices/platform/kcal_ctrl.0/kcal_cont "256"
-
-
 # Sched Rt Tweaks
 write /proc/sys/kernel/sched_rt_period_us "100000"
 write /proc/sys/kernel/sched_rt_runtime_us "95000"
