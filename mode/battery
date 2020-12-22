@@ -1,0 +1,343 @@
+#!/system/bin/sh
+# Written by Draco (tytydraco @ GitHub)
+# modded by NotZeetaa
+
+
+# Safely apply sysctl adjustment
+ctl() {
+	# Fetch the current key value
+	local curval=`sysctl -e -n "$1"`
+
+	# Bail out if sysctl key does not exist
+	if [[ -z "$curval" ]]
+	then
+		err "Key $1 does not exist. Skipping."
+		return 1
+	fi
+
+	# Bail out if sysctl is already set
+	if [[ "$curval" == "$2" ]]
+	then
+		dbg "Key $1 is already set to $2. Skipping."
+		return 0
+	fi
+
+	# Set the new value
+	sysctl -w "$1"="$2" &> /dev/null
+
+	# Bail out if write fails
+	if [[ $? -ne 0 ]]
+	then
+		err "Failed to write $2 to $1. Skipping."
+		return 1
+	fi
+
+	dbg "Set $1: $curval --> $2"
+}
+
+# Safely write value to file
+write() {
+	# Bail out if file does not exist
+	if [[ ! -f "$1" ]]
+	then
+		err "File $1 does not exist. Skipping."
+		return 1
+	fi
+
+	# Fetch the current key value
+	local curval=`cat "$1" 2> /dev/null`
+
+	# Bail out if value is already set
+	if [[ "$curval" == "$2" ]]
+	then
+		dbg "File $1 is already set to $2. Skipping."
+		return 0
+	fi
+
+	# Write the new value
+	echo "$2" > "$1"
+
+	# Bail out if write fails
+	if [[ $? -ne 0 ]]
+	then
+		err "Failed to write $2 to $1. Skipping."
+		return 1
+	fi
+
+	dbg "Wrote $1: $curval --> $2"
+}
+
+usage() {
+	echo -n "Usage: `basename $0` [OPTIONS] [NAME]
+Options:
+  -d			Show debug logs
+  -h			Show usage
+"
+}
+
+while getopts ":dh" opt; do
+	case $opt in
+		d)
+			DEBUG=1
+			;;
+		h)
+			usage
+			exit 0
+			;;
+		*)
+			usage
+			exit 1
+			;;
+	esac
+done
+shift $((OPTIND-1))
+
+# Print device information prior to execution
+dbg "----- Device Information -----"
+# Kernel and device information
+dbg `uname -a`
+
+# Scheduler feature check
+[[ -f "/sys/kernel/debug/sched_features" ]] && dbg "Scheduler features exposed."
+
+# CPU boost check
+[[ -d "/sys/module/cpu_boost" ]] && dbg "CAF CPU boost detected."
+
+# ZRAM support state
+[[ -d "/sys/block/zram0" ]] && dbg "ZRAM supported."
+dbg "------------------------------"
+
+
+# CPU
+for cpu in /sys/devices/system/cpu/cpu*/cpufreq/
+do
+	write "${cpu}scaling_min_freq" `cat "${cpu}cpuinfo_min_freq"`
+	write "${cpu}scaling_max_freq" `cat "${cpu}cpuinfo_max_freq"`
+
+	avail_govs=`cat "${cpu}scaling_available_governors"`
+	[[ "$avail_govs" == *"interactive"* ]] && write "${cpu}scaling_governor" interactive
+	[[ "$avail_govs" == *"schedutil"* ]] && write "${cpu}scaling_governor" schedutil
+
+	# Interactive-specific tweaks
+	if [[ -d "${cpu}interactive" ]]
+	then
+		write "${cpu}interactive/go_hispeed_load" 75
+      write "${cpu}interactive/above_hispeed_delay" 198000 1401000:18000 1536000:78000
+      write "${cpu}interactive/timer_slack" 
+      write "${cpu}interactive/boost" 0
+      write "${cpu}interactive/fast_ramp_down" 0
+      write "${cpu}interactive/boostpulse" 0
+      write "${cpu}interactive/min_sample_time" 5000
+		write "${cpu}interactive/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
+	fi
+
+	# Schedutil-specific tweaks
+	if [[ -d "${cpu}schedutil" ]]
+	then
+		write "${cpu}schedutil/up_rate_limit_us" 0
+		write "${cpu}schedutil/down_rate_limit_us" 0
+		write "${cpu}schedutil/hispeed_load" 75
+     write "${cpu}schedutil/rtg_boost_freq" 900000
+		write "${cpu}schedutil/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
+	fi
+done
+
+
+# I/O
+for queue in /sys/block/*/queue/
+do
+	write "${queue}iostats" 0
+	write "${queue}read_ahead_kb" 64
+	write "${queue}nr_requests" 64
+	write "${queue}scheduler" cfq
+	write "${queue}scheduler" cfq
+done
+
+# Alarm Blocker
+su -c "pm disable com.google.android.apps.messaging/.shared.analytics.recurringmetrics..AnalyticsAlarmReceiver
+su -c "pm disable com.google.android.location.internal.UPLOAD_ANALYTICS
+
+# WakeLock Blocker
+su -c "pm disable com.google.android.apps.wellbeing/.powerstate.impl.PowerStateJobService"
+su -c "pm disable com.google.android.apps.wellbeing/androidx.work.impl.background.systemjob.SystemJobService"
+su -c "pm disable com.facebook.katana/com.facebook.analytics.appstatelogger.AppStateIntentService"
+su -c "pm disable com.facebook.orca/com.facebook.analytics.apptatelogger.AppStateIntentService"
+su -c "pm disable com.facebook.orca/com.facebook.analytics2.Logger.LollipopUploadService"
+write /sys/class/misc/boeffla_wakelock_blocker/wakelock_blocker "qcom_rx_wakelock;wlan;wlan_wow_wl;wlan_extscan_wl;netmgr_wl;NETLINK;IPA_WS;[timerfd];wlan_ipa;wlan_pno_wl;wcnss_filter_lock;IPCRTR_lpass_rx;hal_bluetooth_lock"
+
+# Gms Blocker
+su -c "pm disable com.google.android.gms/com.google.android.gms.nearby.bootstrap.service.NearbyBootstrapService"
+su -c "pm disable com.google.android.gms/NearbyMessagesService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.nearby.connection.service.NearbyConnectionsAndroidService"
+su -c "pm disable com.google.android.gms/com.google.location.nearby.direct.service.NearbyDirectService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.lockbox.LockboxService"
+su -c "pm disable com.google.android.gms/.measurement.PackageMeasurementTaskService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.auth.trustagent.GoogleTrustAgent"
+
+# Better Battery Efficient
+write /sys/module/workqueue/parameters/power_efficient "Y"
+
+# Adreno Idler
+write /sys/module/adreno_idler/paremeters/adreno_idler_active "Y"
+
+# Force Fast Charge
+write /sys/kernel/fast_charge/force_fast_charge "1"
+
+# Cpu Input Boost
+write /sys/module/cpu_input_boost/parameters/input_boost_duration "0"
+write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost_duration "0"
+write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost "0"
+
+# kgsl-3d0 No Throttling
+write /sys/class/kgsl/kgsl-3d0/throttling "0"
+write /sys/class/kgsl/kgsl-3d0/default_pwrlevel "5"
+
+# Scheduler
+write /sys/block/sda/queue/scheduler "cfq"
+write /sys/block/sdb/queue/scheduler "cfq"
+write /sys/block/sdc/queue/scheduler "cfq"
+write /sys/block/sdd/queue/scheduler "cfq"
+write /sys/block/sde/queue/scheduler "cfq"
+write /sys/block/sdf/queue/scheduler "cfq"
+
+# Dev Stune Boost
+# Fast Sensivity in Game
+write /dev/stune/background/schedtune.boost "0"
+write /dev/stune/background/schedtune.prefer_idle "0"
+write /dev/stune/background/schedtune.colocate "0"
+write /dev/stune/background/schedtune.sched_boost_enabled "0"
+
+write /dev/stune/foreground/schedtune.boost "0"
+write /dev/stune/foreground/schedtune.prefer_idle "0"
+write /dev/stune/foreground/schedtune.colocate "0"
+write /dev/stune/foreground/schedtune.sched_boost_enabled "0"
+
+write /dev/stune/rt/schedtune.boost "0"
+write /dev/stune/rt/schedtune.prefer_idle "0"
+write /dev/stune/rt/schedtune.colocate "0"
+write /dev/stune/rt/schedtune.sched_boost_enabled "0"
+
+write /dev/stune/top-app/schedtune.boost "0"
+write /dev/stune/top-app/schedtune.prefer_idle "0"
+write /dev/stune/top-app/schedtune.colocate "0"
+write /dev/stune/top-app/schedtune.sched_boost_enabled "0"
+
+write /dev/stune/schedtune.boost "0"
+write /dev/stune/schedtune.prefer_idle "0"
+write /dev/stune/schedtune.colocate "0"
+write /dev/stune/schedtune.sched_boost_enabled "0"
+
+# Disable Fsync
+chmod 666 /sys/module/sync/parameters/fsync_enable
+chown root /sys/module/sync/parameters/fsync_enable
+write /sys/module/sync/parameters/fsync_enable "N"
+
+chmod 666 /sys/kernel/dyn_fsync/Dyn_fsync_active
+chown root /sys/kernel/dyn_fsync/Dyn_fsync_active
+write /sys/kernel/dyn_fsync/Dyn_fsync_active "0"
+
+chmod 666 /sys/class/misc/fsynccontrol/fsync_enabled
+chown root /sys/class/misc/fsynccontrol/fsync_enabled
+write /sys/class/misc/fsynccontrol/fsync_enabled "0"
+
+chmod 666 /sys/module/sync/parameters/fsync
+chown root /sys/module/sync/parameters/fsync
+write /sys/module/sync/parameters/fsync "0"
+
+# Fs
+write /proc/sys/fs/dir-notify-enable "0"
+write /proc/sys/fs/lease-break-time "15"
+write /proc/sys/fs/aio-max-nr "131072"
+
+# Power Suspend
+write /sys/kernel/power_suspend/ "3"
+
+# Kernel Tweaks
+write /proc/sys/kernel/perf_cpu_time_max_percent "0"
+write /proc/sys/kernel/perf_event_max_sample_rate"9000"
+write /proc/sys/kernel/perf_event_mlock_kb "0"
+write /proc/sys/kernel/sched_child_runs_first "0"
+write /proc/sys/kernel/sched_boost "0"
+write /proc/sys/kernel/sched_downmigrate "0"
+write /proc/sys/kernel/sched_group_upmigrate "0"
+write /proc/sys/kernel/sched_upmigrate "0"
+write /proc/sys/kernel/sched_cfs_boost "0"
+write /proc/sys/vm/dirty_ratio "100"
+write /proc/sys/vm/dirty_writeback_centises "3200"
+write /proc/sys/vm/vfs_cache_pressure "65"
+
+# zRam made by Lawrun 
+swapoff /dev/block/zram0
+echo "1" > /sys/block/zram0/reset
+echo "0" > /sys/block/zram0/disksize
+echo "4294967296" > /sys/block/zram0/disksize
+echo "1536M" > /sys/block/zram0/mem_limit
+echo "8" > /sys/block/zram0/max_comp_streams
+mkswap /dev/block/zram0
+swapon /dev/block/zram0 -p 32758
+echo "100" > /proc/sys/vm/swappiness
+echo "10" > /proc/sys/vm/dirty_background_ratio
+echo "60" > /proc/sys/vm/vfs_cache_pressure
+echo "3000" > /proc/sys/vm/dirty_writeback_centisecs
+echo "lZ4" > /sys/block/zram0/comp_algorithm
+
+# Kcal Config
+write /sys/devices/platform/kcal_ctrl.0/kcal "248 245 245"
+write /sys/devices/platform/kcal_ctrl.0/kcal_enable "1" 
+write /sys/devices/platform/kcal_ctrl.0/kcal_sat "268" 
+write /sys/devices/platform/kcal_ctrl.0/kcal_val "256"
+write /sys/devices/platform/kcal_ctrl.0/kcal_cont "256"
+
+
+# Sched Rt Tweaks
+write /proc/sys/kernel/sched_rt_period_us "100000"
+write /proc/sys/kernel/sched_rt_runtime_us "95000"
+
+# TCP Type
+sysctl -w net.ipv4.tcp_congestion_control=cubic
+
+# Entropy config
+echo '64' > /proc/sys/kernel/random/read_wakeup_threshold
+echo '64' > /proc/sys/kernel/random/write_wakeup_threshold
+
+echo 0-4 > /dev/cpuset/camera-daemon/cpus
+echo 0-4 > /dev/cpuset/audio-app/cpus
+echo 0-4 > /dev/cpuset/top-app/cpus
+echo 0-4 > /dev/cpuset/foreground/cpus
+echo 0-4 > /dev/cpuset/background/cpus
+echo 0-4 > /dev/cpuset/system-background/cpus
+echo 0-4 > /dev/cpuset/restricted/cpus
+echo 0-4 > /dev/cpuset/cpus
+
+# Scheduler features
+if [[ -f "/sys/kernel/debug/sched_features" ]]
+then
+	write /sys/kernel/debug/sched_features NEXT_BUDDY
+	write /sys/kernel/debug/sched_features NO_TTWU_QUEUE
+   write /sys/kernel/debug/sched_features NO_WAKEUP_PREEMPTION
+   write /sys/kernel/debug/sched_features NO_GENTLE_FAIR_SLEEPERS
+fi
+
+
+# Gms Blocker V2
+su -c "pm disable com.google.android.gms/com.google.android.gms.lockbox.service.LockboxBrokerService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.ads.cache.CacheBrokerService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.ads.AdRequestBrokerService 
+su -c "pm disable com.google.android.gms/com.google.android.gms.icing.service.IndexService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.fitness.service.history.FitHistoryBroker"
+su -c "pm disable com.google.android.gms/com.google.android.gms.tron.CollectionService"
+
+  # Blu-schedutil Tweaks
+  if [[ -d "${cpu}blu_schedutil" ]]
+  then
+    write "${cpu}blu_schedutil/up_rate_limit_us" 0
+	  write "${cpu}blu_schedutil/down_rate_limit_us" 0
+    write "${cpu}blu_schedutil/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
+  fi
+done
+
+
+
+
+
+dbg "Finished with $ERR_CNT failed writes."

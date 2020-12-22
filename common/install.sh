@@ -1,0 +1,281 @@
+ui_print "  __________ ____  "
+ui_print " |__  /_   _/ ___| "
+ui_print "   / /  | | \___ \ "
+ui_print "  / /_  | |  ___) |"
+ui_print " /____| |_| |____/ "
+ui_print "                           "
+ui_print "𝗭𝗲𝗲𝘁𝗮𝗮𝗧𝘄𝗲𝗮𝗸𝘀 V12 𝗠𝗮𝗱𝗲 𝗯𝘆 @NotZeeta"
+sleep 0.2
+ui_print " "
+ui_print "The ZeetaaTweaks unlocks the full power ⚡ of all Devices"
+sleep 0.2
+ui_print " "
+ui_print "👨‍💻 Checking Phone Information "
+sleep 0.2
+ui_print " "
+ui_print "📱Processor : $(getprop ro.product.board) "
+sleep 0.2
+ui_print " "
+ui_print "📱Arm Version : $(getprop ro.product.cpu.abi) "
+sleep 0.2
+ui_print " "
+ui_print "📱Board Platform : $(getprop ro.board.platform) "
+sleep 0.2
+ui_print " "
+ui_print "📱Manufacturer : $(getprop ro.product.system.manufacturer) "
+sleep 0.2
+ui_print " "
+ui_print "🕒 sᴇᴛᴛɪɴɢ ᴛᴡᴇᴀᴋs"
+sleep 0.5
+ui_print " "
+ui_print "- Extracting module files"
+unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
+unzip -o "$ZIPFILE" 'lavender/*' -d $TMPDIR >&2
+unzip -o "$ZIPFILE" 'audio/*' -d $TMPDIR >&2
+unzip -o "$ZIPFILE" 'gmszt/*' -d $TMPDIR >&2
+unzip -o "$ZIPFILE" 'mode/*' -d $TMPDIR >&2
+mkdir -p $MODPATH/system/bin
+mkdir -p $MODPATH/system/etc/sysconfig
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "      Select The Android Version        "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. Q (10)"
+ui_print "  2. Pie (9)"
+ui_print "  3. Oreo (8.0/8.1)"
+ui_print "  4. Nougat (7.0/7.1)"
+ui_print "  5. Marshmallow (6.0)"
+ui_print " "
+ui_print "  Select: "
+AV=1
+while true; do
+ui_print "   $AV"
+	if $VKSEL; then
+		AV=$((AV + 1))
+	else 
+		break
+	fi
+	if [ $AV -gt 5 ]; then
+		AV=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $AV"
+#
+case $AV in
+ 1 ) FCTEXTAD1="- Q (10)"; cp -af $TMPDIR/gmszt/10/google.xml $MODPATH/system/etc/sysconfig;;
+ 2 ) FCTEXTAD1="- Pie (9)"; cp -af $TMPDIR/gmszt/9/google.xml $MODPATH/system/etc/sysconfig;;
+ 3 ) FCTEXTAD1="- Oreo (8)"; cp -af $TMPDIR/gmszt/8/google.xml $MODPATH/system/etc/sysconfig;;
+ 4 ) FCTEXTAD1="- Nougat (7)"; cp -af $TMPDIR/gmszt/7/google.xml $MODPATH/system/etc/sysconfig;;
+ 5 ) FCTEXTAD1="- Marshmallow (6)"; cp -af $TMPDIR/gmszt/6/google.xml $MODPATH/system/etc/sysconfig;;
+esac
+ui_print " "
+ui_print "- Android Version: $FCTEXTAD1 "
+sleep 0.5
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "       Select Mode?  📳     "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. 🔋 Battery Mode "
+ui_print "  2. 🎮 Gaming Mode "
+ui_print " "
+ui_print "  Select: "
+ZT=1
+while true; do
+ui_print "   $ZT"
+	if $VKSEL; then
+		ZT=$((ZT + 1))
+	else 
+		break
+	fi
+	if [ $ZT -gt 2 ]; then
+		ZT=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $ZT"
+#
+case $ZT in
+ 1 ) FCTEXTAD2="Battery"; cp -af $TMPDIR/mode/battery $MODPATH/system/bin;;
+ 2 ) FCTEXTAD2="Gaming"; cp -af $TMPDIR/mode/gaming $MODPATH/system/bin; cp -af $TMPDIR/mode/autoperf $MODPATH/system/bin;;
+esac
+ui_print " "
+ui_print "- Mode: $FCTEXTAD2 "
+sleep 1
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "      You  Want Thermals for Redmi Note 7?   🚀     "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. ✅ Yes "
+ui_print "  2. ❌ No "
+ui_print " "
+ui_print "  Select: "
+TH=1
+while true; do
+ui_print "   $TH"
+	if $VKSEL; then
+		TH=$((TH + 1))
+	else 
+		break
+	fi
+	if [ $TH -gt 2 ]; then
+		TH=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $TH"
+#
+case $TH in
+ 1 ) FCTEXTAD3="Enable"; cp -af $TMPDIR/lavender/* $MODPATH/system;;
+ 2 ) FCTEXTAD3="Disable"; rm -rf $TMPDIR/lavender;;
+esac
+ui_print " "
+ui_print "- Thermal Engine Mode: $FCTEXTAD3 "
+sleep 0.5
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "          Credits To Masik Miui "
+ui_print "      You Want Masik Pulse Audio?   🔊     "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. ✅ Yes ( Lavender ONLY ) "
+ui_print "  2. ❌ No "
+ui_print " "
+ui_print "  Select: "
+AD=1
+while true; do
+ui_print "   $AD"
+	if $VKSEL; then
+		AD=$((AD + 1))
+	else 
+		break
+	fi
+	if [ $AD -gt 2 ]; then
+		AD=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $AD"
+#
+case $AD in
+ 1 ) FCTEXTAD4="Enable"; cp -af $TMPDIR/audio/* $MODPATH/system;;
+ 2 ) FCTEXTAD4="Disable"; rm -rf $TMPDIR/audio;;
+esac
+ui_print " "
+ui_print "- Sound Mode: $FCTEXTAD4"
+sleep 0.5
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "     All Credits to AkiraSuper "
+ui_print "      SELinux Mode Changer        "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. Enforcing"
+ui_print "  2. Permissive"
+ui_print "  3. Default"
+ui_print " "
+ui_print "  Select: "
+SL=1
+while true; do
+ui_print "   $SL"
+	if $VKSEL; then
+		SL=$((SL + 1))
+	else 
+		break
+	fi
+	if [ $SL -gt 3 ]; then
+		SL=1
+	fi
+done
+ui_print ""
+ui_print "  SELinux Mode: $SL"
+#
+case $SL in
+	1 ) FCTEXTAD5="Enforcing"; sed -i "s/<SELINUX_MODE>/1/g" $MODPATH/post-fs-data.sh;;
+	2 ) FCTEXTAD5="Permissive"; sed -i "s/<SELINUX_MODE>/0/g" $MODPATH/post-fs-data.sh;;
+	3 ) FCTEXTAD5="Default"; sed -i "s/<SELINUX_MODE>/<SELINUX_MODE>/g" $MODPATH/post-fs-data.sh;;
+esac
+ui_print ""
+ui_print "- SELinux Mode: $FCTEXTAD5"
+sleep 0.5
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "      You  Want Analytics Remover?   🔋     "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. ✅ Yes "
+ui_print "  2. ❌ No "
+ui_print " "
+ui_print "  Select: "
+AL=1
+while true; do
+ui_print "   $AL"
+	if $VKSEL; then
+		AL=$((AL + 1))
+	else 
+		break
+	fi
+	if [ $AL -gt 2 ]; then
+		AL=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $AL"
+#
+case $AL in
+ 1 ) FCTEXTAD6="Enable"; cp -af $TMPDIR/mode/analytics $MODPATH/system/bin;;
+ 2 ) FCTEXTAD6="Disable"; rm -rf $TMPDIR/mode;;
+esac
+ui_print ""
+ui_print "- Analytics Remover Mode: $FCTEXTAD6"
+sleep 1
+ui_print " "
+ui_print " 🔥 𝗣𝗲𝗿𝗳𝗼𝗿𝗺𝗮𝗻𝗰𝗲 𝗜𝗺𝗽𝗿𝗼𝘃𝗲𝗱"
+sleep 0.5
+ui_print " "
+ui_print " 🔋 𝗕𝗮𝘁𝘁𝗲𝗿𝘆 𝗜𝗺𝗽𝗿𝗼𝘃𝗲𝗱"
+sleep 0.5
+ui_print " "
+ui_print " 🎮 𝗚𝗮𝗺𝗶𝗻𝗴 𝗮𝗻𝗱 𝗦𝗲𝗻𝘀𝗶𝘃𝗶𝘁𝘆 𝗶𝗺𝗽𝗿𝗼𝘃𝗲𝗱"
+sleep 0.5
+ui_print " "
+# Force Stope Some apps
+ui_print " 📲 Force Stopped Some Apps..."
+am force-stop com.facebook.lite
+am force-stop com.android.chrome
+am force-stop com.google.android.apps.docs
+am force-stop com.google.android.apps.photos
+ui_print " "
+sleep 0.5
+# Cleaner Junk Files
+ui_print " 🗑️ Cleaned JunkFiles..."
+busybox rm -f /data/local/tmp/* 2>/dev/null
+busybox rm -f /tmp/* 2>/dev/null
+busybox rm -f /data/*.log 2>/dev/null
+busybox rm -f /data/*.tmp
+busybox rm -f /cache/*.apk 2>/dev/null
+busybox rm -f /cache/*.tmp 2>/dev/null
+busybox rm -f /sdcard/LOST.DIR/* 2>/dev/null
+busybox rm -f /data/system/usagestats/* 2>/dev/null
+busybox rm -f /data/tombstones/* 2>/dev/null
+busybox rm -f /data/anr/* 2>/dev/null
+rm -f /data/dalvik-cache/*.apk
+rm -f /data/dalvik-cache/*.tmp
+busybox rm -f /data/system/userbehavior.db
+ui_print " "
+sleep 1
