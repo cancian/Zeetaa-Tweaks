@@ -230,9 +230,6 @@ write /proc/sys/vm/dirty_ratio "100"
 write /proc/sys/vm/dirty_writeback_centises "3200"
 write /proc/sys/vm/vfs_cache_pressure "65"
 
-# TCP Type
-sysctl -w net.ipv4.tcp_congestion_control=cubic
-
 # Entropy config
 echo '64' > /proc/sys/kernel/random/read_wakeup_threshold
 echo '64' > /proc/sys/kernel/random/write_wakeup_threshold
