@@ -249,9 +249,6 @@ write /proc/sys/fs/dir-notify-enable "0"
 write /proc/sys/fs/lease-break-time "15"
 write /proc/sys/fs/aio-max-nr "131072"
 
-# Power Suspend
-write /sys/kernel/power_suspend/ "3"
-
 # Kernel Tweaks
 write /proc/sys/kernel/perf_cpu_time_max_percent "0"
 write /proc/sys/kernel/perf_event_max_sample_rate"9000"
