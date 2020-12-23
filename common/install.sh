@@ -239,8 +239,43 @@ ui_print "  Selected: $AL"
 #
 case $AL in
  1 ) FCTEXTAD6="Enable"; cp -af $TMPDIR/mode/analytics $MODPATH/system/bin;;
- 2 ) FCTEXTAD6="Disable"; rm -rf $TMPDIR/mode;;
+ 2 ) FCTEXTAD6="Disable"; rm -rf $TMPDIR/mode/analytics;;
 esac
+ui_print ""
+ui_print "- Analytics Remover Mode: $FCTEXTAD5"
+
+sleep 0.5
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print "       You Want Gms Blocker?  🔋     "
+ui_print "    ×××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. ✅ Yes "
+ui_print "  2. ❌ No "
+ui_print " "
+ui_print "  Select: "
+GS=1
+while true; do
+ui_print "   $GS"
+	if $VKSEL; then
+		GS=$((GS + 1))
+	else 
+		break
+	fi
+	if [ $GS -gt 2 ]; then
+		GS=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $GS"
+#
+case $GS in
+ 1 ) FCTEXTAD6="Yes"; cp -af $TMPDIR/mode/gms $MODPATH/system/bin;;
+ 2 ) FCTEXTAD6="No"; rm -rf $TMPDIR/mode;;
+esac
+
 ui_print ""
 ui_print "- Analytics Remover Mode: $FCTEXTAD6"
 sleep 1
