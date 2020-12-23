@@ -240,8 +240,8 @@ fi
   # Blu-schedutil Tweaks
   if [[ -d "${cpu}blu_schedutil" ]]
   then
-    write "${cpu}blu_schedutil/up_rate_limit_us" 2000
-	  write "${cpu}blu_schedutil/down_rate_limit_us" 2000
+    write "${cpu}blu_schedutil/up_rate_limit_us" 200
+	  write "${cpu}blu_schedutil/down_rate_limit_us" 4500
     write "${cpu}blu_schedutil/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
   fi
 done
