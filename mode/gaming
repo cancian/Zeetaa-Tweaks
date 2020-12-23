@@ -122,7 +122,6 @@ do
 	if [[ -d "${cpu}interactive" ]]
 	then
 		write "${cpu}interactive/go_hispeed_load" 75
-      write "${cpu}interactive/above_hispeed_delay" 198000 1401000:18000 1536000:78000
       write "${cpu}interactive/timer_slack" -1
       write "${cpu}interactive/boost" 0
       write "${cpu}interactive/fast_ramp_down" 0
