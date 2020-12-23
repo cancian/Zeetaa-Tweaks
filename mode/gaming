@@ -135,7 +135,7 @@ do
 	then
 		write "${cpu}schedutil/up_rate_limit_us" 200
 		write "${cpu}schedutil/down_rate_limit_us" 4500
-		write "${cpu}schedutil/hispeed_load" 75
+		write "${cpu}schedutil/hispeed_load" 
      write "${cpu}schedutil/rtg_boost_freq" 1200000
 		write "${cpu}schedutil/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
 	fi
