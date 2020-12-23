@@ -127,7 +127,7 @@ do
       write "${cpu}interactive/boost" 0
       write "${cpu}interactive/fast_ramp_down" 0
       write "${cpu}interactive/boostpulse" 0
-      write "${cpu}interactive/min_sample_time" 5000
+      write "${cpu}interactive/min_sample_time" 
 		write "${cpu}interactive/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
 	fi
 
