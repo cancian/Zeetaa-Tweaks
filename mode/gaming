@@ -121,7 +121,7 @@ do
 	# Interactive-specific tweaks
 	if [[ -d "${cpu}interactive" ]]
 	then
-		write "${cpu}interactive/go_hispeed_load" 75
+		write "${cpu}interactive/go_hispeed_load"
       write "${cpu}interactive/timer_slack" -1
       write "${cpu}interactive/boost" 1
       write "${cpu}interactive/fast_ramp_down" 0
