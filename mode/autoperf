@@ -37,7 +37,7 @@ ext4blocks="/sys/fs/ext4/mmcblk0p*"
 # Modified Gaming Mode Script from @HafizZiq
 while true; do
  sleep 20
- if [ $(top -n 1 -d 1 | head -n 12 | grep -o -e 'mobile' -e 'skynet' -e 'cputhrottlingtest' -e 'codm' -e 'legends' -e 'nexon' -e 'ea.game' -e 'konami' -e 'bandainamco' -e 'netmarble' -e 'GoogleCam' -e 'edengames' -e 'camera' -e 'snapcam' -e 'tencent' -e 'moonton' -e 'gameloft' -e 'netease' -e 'garena' | head -n 1) ]; then
+ if [ $(top -n 1 -d 1 | head -n 12 | grep -o -e 'mobile' -e 'skynet' -e 'cputhrottlingtest' -e 'codm' -e 'legends' -e 'nexon' -e 'ea.game' -e 'konami' -e 'bandainamco' -e 'netmarble' -e 'GoogleCam' -e 'edengames' -e 'camera' -e 'snapcam' -e 'tencent' -e 'moonton' -e 'gameloft' -e 'netease' -e 'garena' -e 'epic' | head -n 1) ]; then
             echo "performance" > /sys/class/devfreq/cc00000.qcom,vidc:venus_bus_ddr/governor
             echo "performance" > /sys/class/devfreq/mmc0/governor
             echo "performance" > /sys/class/devfreq/mmc1/governor
