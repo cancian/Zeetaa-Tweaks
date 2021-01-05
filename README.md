@@ -4,12 +4,13 @@
 
 #### Notes:
 ```
-
 - Support all Devices
-- This is a Magisk Module created by @NotZeetaa ( U need to Flash in Magisk )
-- This Module improves your Performance and Battery
-- Check new Updates and Support Group Below!
-
+- This is a Magisk Module created
+by @NotZeetaa ( U need to Flash in Magisk )
+- This Module improves your
+Performance and Battery
+- Check new Updates and Support Group
+ Below!
 ```
 <p align="center">
   <a href="https://t.me/ZeetaaProjects"><img src="https://img.shields.io/badge/Telegram-Channel-red.svg"></a><br/><a href="https://t.me/ZeetaaProjectsGroup"><img src="https://img.shields.io/badge/Telegram-Group-red.svg"></a> <br/><a href="https://t.me/ZeetaaProjectsGroupBr"><img src="https://img.shields.io/badge/Telegram-GroupBr-red.svg"></a>
