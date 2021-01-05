@@ -19,7 +19,8 @@ blink=$(tput blink)             # blink
 DATE_START=$(date +"%s")
 echo -e "${bldgrn}"
 
-zip -r9 ZeetaaTweaksV13Stable.zip * -x .git README.md *placeholder
+rm -f /data/data/com.termux/files/home/ubuntu-in-termux/ubuntu-fs/root/zts/*.zip;
+zip -r9 ZeetaaTweaksV13Stable.zip * -x .git README.md *placeholder | tee zip.log
 
 echo "-------------------"
 echo "Build Complet in:"
