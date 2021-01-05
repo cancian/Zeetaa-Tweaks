@@ -234,15 +234,6 @@ write /proc/sys/vm/vfs_cache_pressure "65"
 echo '64' > /proc/sys/kernel/random/read_wakeup_threshold
 echo '64' > /proc/sys/kernel/random/write_wakeup_threshold
 
-echo 0-4 > /dev/cpuset/camera-daemon/cpus
-echo 0-4 > /dev/cpuset/audio-app/cpus
-echo 0-4 > /dev/cpuset/top-app/cpus
-echo 0-4 > /dev/cpuset/foreground/cpus
-echo 0-4 > /dev/cpuset/background/cpus
-echo 0-4 > /dev/cpuset/system-background/cpus
-echo 0-4 > /dev/cpuset/restricted/cpus
-echo 0-4 > /dev/cpuset/cpus
-
 # Scheduler features
 if [[ -f "/sys/kernel/debug/sched_features" ]]
 then
