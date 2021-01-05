@@ -17,6 +17,11 @@ Performance and Battery
 </p>
 <br/> 
 
+#### Credits:
+- @akira-vishal for help alot and Bish Gang 😂
+- @jack08 for that Lob Banner and Support all The time 😍
+- Thx to All Beta Testers 🥰😘
+
 ## Changelog 
 
 ### ZeetaaTweaks V13:
