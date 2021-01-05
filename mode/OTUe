@@ -1,0 +1,9 @@
+#!/system/bin/sh
+MODDIR=${0%/*}
+
+chmod 644 /sys/class/thermal/thermal_message/sconfig
+echo "10" > /sys/class/thermal/thermal_message/sconfig
+su -c echo "10" > /sys/class/thermal/thermal_message/sconfig
+chmod 444 /sys/class/thermal/thermal_message/sconfig
+
+

@@ -273,11 +273,45 @@ ui_print "  Selected: $GS"
 #
 case $GS in
  1 ) FCTEXTAD6="Yes"; cp -af $TMPDIR/mode/gms $MODPATH/system/bin;;
- 2 ) FCTEXTAD6="No"; rm -rf $TMPDIR/mode;;
+ 2 ) FCTEXTAD6="No"; rm -rf $TMPDIR/mode/gms;;
 esac
-
 ui_print ""
 ui_print "- Analytics Remover Mode: $FCTEXTAD6"
+
+ui_print " "
+ui_print "    ×××××××××××××××××××××××××××××××××××××××××××××"
+ui_print "       You Want Optimized Universal Thermal Mode?  🎮     "
+ui_print "    ×××××××××××××××××××××××××××××××××××××××××××××"
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. Yes "
+ui_print "  2. No "
+ui_print " "
+ui_print "  Select: "
+UT=1
+while true; do
+ui_print "   $UT"
+	if $VKSEL; then
+		UT=$((UT + 1))
+	else 
+		break
+	fi
+	if [ $UT -gt 2 ]; then
+		UT=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $UT"
+#
+case $UT in
+ 1 ) FCTEXTAD7="OptimizedUniversalThermal Enabled"; cp -af $TMPDIR/mode/OTUe $MODPATH/system/bin;;
+ 2 ) FCTEXTAD7="OptimizedUniversalThermal Disabled"; rm -rf $TMPDIR/mode;;
+esac
+ui_print " "
+ui_print "- Mode: $FCTEXTAD7 "
+sleep 5
+
 sleep 1
 ui_print " "
 ui_print " 🔥 𝗣𝗲𝗿𝗳𝗼𝗿𝗺𝗮𝗻𝗰𝗲 𝗜𝗺𝗽𝗿𝗼𝘃𝗲𝗱"
