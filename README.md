@@ -1,13 +1,15 @@
 ![IMG_20210105_222157_267](https://user-images.githubusercontent.com/67799176/103706233-6f91f780-4fa4-11eb-877c-5d47a1c27cdb.jpg)
 
-## ZeetaaTweaks
+# ZeetaaTweaks
 
 This Modules improves your Performance and Battery 
 
 Supports:
 - All Devices
 
-# Changelog 
+By: @NotZeetaa 
+
+## Changelog 
 
 ### ZeetaaTweaks V13:
 - Set the Dev stune boost to Gaming mode to 20
