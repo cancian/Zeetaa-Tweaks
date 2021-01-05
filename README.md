@@ -13,7 +13,7 @@ Performance and Battery
  Below!
 ```
 <p align="center">
-  <a href="https://t.me/ZeetaaProjects"><img src="https://img.shields.io/badge/Telegram-Channel-red.svg"></a><br/><a href="https://t.me/ZeetaaProjectsGroup"><img src="https://img.shields.io/badge/Telegram-Group-red.svg"></a> <br/><a href="https://t.me/ZeetaaProjectsGroupBr"><img src="https://img.shields.io/badge/Telegram-GroupBr-red.svg"></a>
+  <a href="https://sourceforge.net/projects/m-dulos/files/ZeetaaTweaks/"><img src="https://img.shields.io/badge/Download-Module-red.svg"></a> <br/><a href="https://t.me/ZeetaaProjects"><img src="https://img.shields.io/badge/Telegram-Channel-red.svg"></a><br/><a href="https://t.me/ZeetaaProjectsGroup"><img src="https://img.shields.io/badge/Telegram-Group-red.svg"></a> <br/><a href="https://t.me/ZeetaaProjectsGroupBr"><img src="https://img.shields.io/badge/Telegram-GroupBr-red.svg"></a>
 </p>
 <br/> 
 
