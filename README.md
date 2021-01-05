@@ -9,7 +9,7 @@ Supports:
 
 ## Changelog 
 
-# ZeetaaTweaks V13:
+### ZeetaaTweaks V13:
 - Set the Dev stune boost to Gaming mode to 20
 - Set the Default Power Level to 1  ( Gaming Profile )
 - Removed Power suspend in Gaming and Battery Profile
@@ -35,7 +35,7 @@ Supports:
 - Reworked in blu_schedutil tweaks
 - autoperf: Added Epic Package Name Support
 
-# ZeetaaTweaks V12
+### ZeetaaTweaks V12
 - Set the Dev stune boost to Gaming mode to 20
 - Set the Default Power Level to 1  ( Gaming Profile )
 - Removed Power suspend in Gaming and Battery Profile
