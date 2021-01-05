@@ -165,7 +165,7 @@ write /sys/kernel/fast_charge/force_fast_charge "1"
 # Cpu Input Boost
 write /sys/module/cpu_input_boost/parameters/input_boost_duration "1"
 write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost_duration "1"
-write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost "80"
+write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost "85"
 
 # Gpu Tweaks
 echo "0" > /sys/class/kgsl/kgsl-3d0/throttling
