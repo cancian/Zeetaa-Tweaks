@@ -4,7 +4,6 @@ ui_print "   / /  | | \___ \ "
 ui_print "  / /_  | |  ___) |"
 ui_print " /____| |_| |____/ "
 ui_print "                           "
-ui_print "𝗭𝗲𝗲𝘁𝗮𝗮𝗧𝘄𝗲𝗮𝗸𝘀 V12 𝗠𝗮𝗱𝗲 𝗯𝘆 @NotZeeta"
 sleep 0.2
 ui_print " "
 ui_print "The ZeetaaTweaks unlocks the full power ⚡ of all Devices"
@@ -43,7 +42,7 @@ ui_print "    ×××××××××××××××××××××××××××××××"
 ui_print " "
 ui_print "  Vol+ = Next; Vol- = Select"
 ui_print " "
-ui_print "  1. Q (10)"
+ui_print "  1. Q&R (10/11)"
 ui_print "  2. Pie (9)"
 ui_print "  3. Oreo (8.0/8.1)"
 ui_print "  4. Nougat (7.0/7.1)"
@@ -66,7 +65,7 @@ ui_print " "
 ui_print "  Selected: $AV"
 #
 case $AV in
- 1 ) FCTEXTAD1="- Q (10)"; cp -af $TMPDIR/gmszt/10/google.xml $MODPATH/system/etc/sysconfig;;
+ 1 ) FCTEXTAD1="- Q&R (10/11)"; cp -af $TMPDIR/gmszt/10/google.xml $MODPATH/system/etc/sysconfig;;
  2 ) FCTEXTAD1="- Pie (9)"; cp -af $TMPDIR/gmszt/9/google.xml $MODPATH/system/etc/sysconfig;;
  3 ) FCTEXTAD1="- Oreo (8)"; cp -af $TMPDIR/gmszt/8/google.xml $MODPATH/system/etc/sysconfig;;
  4 ) FCTEXTAD1="- Nougat (7)"; cp -af $TMPDIR/gmszt/7/google.xml $MODPATH/system/etc/sysconfig;;
