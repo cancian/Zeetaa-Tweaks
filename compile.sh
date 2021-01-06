@@ -20,7 +20,7 @@ DATE_START=$(date +"%s")
 echo -e "${bldgrn}"
 
 rm -f /data/data/com.termux/files/home/ubuntu-in-termux/ubuntu-fs/root/zts/*.zip;
-zip -r9 ZeetaaTweaksV14Stable.zip * -x .git README.md *placeholder | tee zip.log
+zip -r9 ZeetaaTweaksV14.2Stable.zip * -x .git README.md *placeholder
 
 echo "-------------------"
 echo "Build Complet in:"
