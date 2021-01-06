@@ -49,13 +49,6 @@ while true; do
             echo "performance" > /sys/class/devfreq/soc:qcom,memlat-cpu4/governor
             echo "performance" > /sys/class/devfreq/soc:qcom,mincpubw/governor
 
-echo 0-7 > /dev/cpuset/audio-app/cpus
-echo 0-7 > /dev/cpuset/top-app/cpus
-echo 0-7 > /dev/cpuset/foreground/cpus
-echo 0-7 > /dev/cpuset/background/cpus
-echo 0-7 > /dev/cpuset/system-background/cpus
-echo 0-7 > /dev/cpuset/restricted/cpus
-
 echo "1" > /sys/class/kgsl/kgsl-3d0/force_clk_on
 echo "1" > /sys/class/kgsl/kgsl-3d0/force_bus_on
 echo "1" > /sys/class/kgsl/kgsl-3d0/force_rail_on
