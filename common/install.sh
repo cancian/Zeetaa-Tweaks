@@ -76,13 +76,14 @@ ui_print "- Android Version: $FCTEXTAD1 "
 sleep 0.5
 ui_print " "
 ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print "       Select Mode?  📳     "
+ui_print "       Select Mode  📳     "
 ui_print "    ×××××××××××××××××××××××××××××××"
 ui_print " "
 ui_print "  Vol+ = Next; Vol- = Select"
 ui_print " "
 ui_print "  1. 🔋 Battery Mode "
-ui_print "  2. 🎮 Gaming Mode "
+ui_print "  2. ⚖️ Balanced Mode "
+ui_print "  3. 🎮 Gaming Mode "
 ui_print " "
 ui_print "  Select: "
 ZT=1
@@ -93,7 +94,7 @@ ui_print "   $ZT"
 	else 
 		break
 	fi
-	if [ $ZT -gt 2 ]; then
+	if [ $ZT -gt 3 ]; then
 		ZT=1
 	fi
 done
@@ -102,6 +103,7 @@ ui_print "  Selected: $ZT"
 #
 case $ZT in
  1 ) FCTEXTAD2="Battery"; cp -af $TMPDIR/mode/battery $MODPATH/system/bin;;
+ 3 ) FCTEXTAD2="Balanced"; cp -af $TMPDIR/mode/balanced $MODPATH/system/bin;;
  2 ) FCTEXTAD2="Gaming"; cp -af $TMPDIR/mode/gaming $MODPATH/system/bin; cp -af $TMPDIR/mode/autoperf $MODPATH/system/bin;;
 esac
 ui_print " "
