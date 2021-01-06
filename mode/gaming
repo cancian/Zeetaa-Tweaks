@@ -90,7 +90,7 @@ write /dev/stune/schedtune.sched_boost_enabled "0"
 
 # Fs
 write /proc/sys/fs/dir-notify-enable "0"
-write /proc/sys/fs/lease-break-time "15"
+write /proc/sys/fs/lease-break-time "5"
 write /proc/sys/fs/aio-max-nr "131072"
 
 # Entropy config
