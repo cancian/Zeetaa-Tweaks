@@ -59,30 +59,10 @@ write /sys/block/sdf/queue/scheduler "cfq"
 # Dev Stune Boost
 # Fast Sensivity in Game
 write /dev/stune/background/schedtune.boost "0"
-write /dev/stune/background/schedtune.prefer_idle "0"
-write /dev/stune/background/schedtune.colocate "0"
-write /dev/stune/background/schedtune.sched_boost_enabled "0"
-
 write /dev/stune/foreground/schedtune.boost "0"
-write /dev/stune/foreground/schedtune.prefer_idle "0"
-write /dev/stune/foreground/schedtune.colocate "0"
-write /dev/stune/foreground/schedtune.sched_boost_enabled "0"
-
 write /dev/stune/rt/schedtune.boost "0"
-write /dev/stune/rt/schedtune.prefer_idle "0"
-write /dev/stune/rt/schedtune.colocate "0"
-write /dev/stune/rt/schedtune.sched_boost_enabled "0"
-
 write /dev/stune/top-app/schedtune.boost "0"
-write /dev/stune/top-app/schedtune.prefer_idle "0"
-write /dev/stune/top-app/schedtune.colocate "0"
-write /dev/stune/top-app/schedtune.sched_boost_enabled "0"
-
 write /dev/stune/schedtune.boost "0"
-write /dev/stune/schedtune.prefer_idle "0"
-write /dev/stune/schedtune.colocate "0"
-write /dev/stune/schedtune.sched_boost_enabled "0"
-
 # Fs
 write /proc/sys/fs/dir-notify-enable "0"
 write /proc/sys/fs/lease-break-time "15"
