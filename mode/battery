@@ -35,9 +35,6 @@ write /sys/module/workqueue/parameters/power_efficient "Y"
 # Adreno Idler
 write /sys/module/adreno_idler/paremeters/adreno_idler_active "Y"
 
-# Force Fast Charge
-write /sys/kernel/fast_charge/force_fast_charge "1"
-
 # Cpu Input Boost
 write /sys/module/cpu_input_boost/parameters/input_boost_duration "1000"
 write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost_duration "1000"
