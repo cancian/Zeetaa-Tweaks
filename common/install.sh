@@ -103,8 +103,8 @@ ui_print "  Selected: $ZT"
 #
 case $ZT in
  1 ) FCTEXTAD2="Battery"; cp -af $TMPDIR/mode/battery $MODPATH/system/bin;;
- 3 ) FCTEXTAD2="Balanced"; cp -af $TMPDIR/mode/balanced $MODPATH/system/bin;;
- 2 ) FCTEXTAD2="Gaming"; cp -af $TMPDIR/mode/gaming $MODPATH/system/bin; cp -af $TMPDIR/mode/autoperf $MODPATH/system/bin;;
+ 2 ) FCTEXTAD2="Balanced"; cp -af $TMPDIR/mode/balanced $MODPATH/system/bin;;
+ 3 ) FCTEXTAD2="Gaming"; cp -af $TMPDIR/mode/gaming $MODPATH/system/bin; cp -af $TMPDIR/mode/autoperf $MODPATH/system/bin;;
 esac
 ui_print " "
 ui_print "- Mode: $FCTEXTAD2 "
