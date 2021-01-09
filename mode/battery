@@ -19,16 +19,6 @@ echo "4500" > /sys/devices/system/cpu/cpu5/cpufreq/schedutil/up_rate_limit_us
 echo "4500" > /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us
 echo "4500" > /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us
 
-# I/O
-for queue in /sys/block/*/queue/
-do
-	write "${queue}iostats" 0
-	write "${queue}read_ahead_kb" 64
-	write "${queue}nr_requests" 64
-	write "${queue}scheduler" cfq
-	write "${queue}scheduler" cfq
-done
-
 # Better Battery Efficient
 write /sys/module/workqueue/parameters/power_efficient "Y"
 
@@ -67,20 +57,6 @@ write /dev/stune/schedtune.boost "0"
 write /proc/sys/fs/dir-notify-enable "0"
 write /proc/sys/fs/lease-break-time "15"
 write /proc/sys/fs/aio-max-nr "131072"
-
-# Kernel Tweaks
-write /proc/sys/kernel/perf_cpu_time_max_percent "0"
-write /proc/sys/kernel/perf_event_max_sample_rate"9000"
-write /proc/sys/kernel/perf_event_mlock_kb "0"
-write /proc/sys/kernel/sched_child_runs_first "0"
-write /proc/sys/kernel/sched_boost "0"
-write /proc/sys/kernel/sched_downmigrate "0"
-write /proc/sys/kernel/sched_group_upmigrate "0"
-write /proc/sys/kernel/sched_upmigrate "0"
-write /proc/sys/kernel/sched_cfs_boost "0"
-write /proc/sys/vm/dirty_ratio "100"
-write /proc/sys/vm/dirty_writeback_centises "3200"
-write /proc/sys/vm/vfs_cache_pressure "65"
 
 # Entropy config
 echo '64' > /proc/sys/kernel/random/read_wakeup_threshold
