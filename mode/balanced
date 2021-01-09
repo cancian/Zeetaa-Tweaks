@@ -27,16 +27,6 @@ echo "0" > /sys/devices/system/cpu/cpu6/cpufreq/interactive/fast_ramp_down
 echo "200" > /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us
 echo "0" > /sys/devices/system/cpu/cpu7/cpufreq/interactive/fast_ramp_down
 
-# I/O
-for queue in /sys/block/*/queue/
-do
-	write "${queue}iostats" 0
-	write "${queue}read_ahead_kb" 64
-	write "${queue}nr_requests" 64
-	write "${queue}scheduler" cfq
-	write "${queue}scheduler" cfq
-done
-
 # Better Battery Efficient
 write /sys/module/workqueue/parameters/power_efficient "N"
 
