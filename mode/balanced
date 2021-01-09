@@ -28,7 +28,7 @@ echo "200" > /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us
 echo "0" > /sys/devices/system/cpu/cpu7/cpufreq/interactive/fast_ramp_down
 
 # Better Battery Efficient
-echo "N" > /sys/module/workqueue/parameters/power_efficient
+echo "Y" > /sys/module/workqueue/parameters/power_efficient
 
 # Adreno Idler
 echo "N" > /sys/module/adreno_idler/paremeters/adreno_idler_active
