@@ -28,15 +28,15 @@ echo "200" > /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us
 echo "0" > /sys/devices/system/cpu/cpu7/cpufreq/interactive/fast_ramp_down
 
 # Better Battery Efficient
-write /sys/module/workqueue/parameters/power_efficient "N"
+echo "N" > /sys/module/workqueue/parameters/power_efficient
 
 # Adreno Idler
-write /sys/module/adreno_idler/paremeters/adreno_idler_active "N"
+echo "N" > /sys/module/adreno_idler/paremeters/adreno_idler_active
 
 # Cpu Input Boost
-write /sys/module/cpu_input_boost/parameters/input_boost_duration "1"
-write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost_duration "1"
-write /sys/module/cpu_input_boost/parameters/dynamic_stune_boost "20"
+echo "1" > /sys/module/cpu_input_boost/parameters/input_boost_duration
+echo "1" > /sys/module/cpu_input_boost/parameters/dynamic_stune_boost_duration
+echo "20" > /sys/module/cpu_input_boost/parameters/dynamic_stune_boost
 
 # Gpu Tweaks
 echo "0" > /sys/class/kgsl/kgsl-3d0/throttling
@@ -47,25 +47,25 @@ echo "1" > /sys/class/kgsl/kgsl-3d0/force_rail_on
 echo "1" > /sys/class/kgsl/kgsl-3d0/force_no_nap
 
 # Scheduler
-write /sys/block/sda/queue/scheduler "cfq"
-write /sys/block/sdb/queue/scheduler "cfq"
-write /sys/block/sdc/queue/scheduler "cfq"
-write /sys/block/sdd/queue/scheduler "cfq"
-write /sys/block/sde/queue/scheduler "cfq"
-write /sys/block/sdf/queue/scheduler "cfq"
+echo "cfq" > /sys/block/sda/queue/scheduler
+echo "cfq" > /sys/block/sdb/queue/scheduler
+echo "cfq" > /sys/block/sdc/queue/scheduler
+echo "cfq" > /sys/block/sdd/queue/scheduler
+echo "cfq" > /sys/block/sde/queue/scheduler
+echo "cfq" > /sys/block/sdf/queue/scheduler
 
 # Dev Stune Boost
 # Fast Sensivity in Game
-write /dev/stune/background/schedtune.boost "5"
-write /dev/stune/foreground/schedtune.boost "5"
-write /dev/stune/rt/schedtune.boost "5"
-write /dev/stune/top-app/schedtune.boost "5"
-write /dev/stune/schedtune.boost "5"
+echo "5" > /dev/stune/background/schedtune.boost
+echo "5" > /dev/stune/foreground/schedtune.boost
+echo "5" > /dev/stune/rt/schedtune.boost
+echo "5" > /dev/stune/top-app/schedtune.boost
+echo "5" > /dev/stune/schedtune.boost
 
 # Fs
-write /proc/sys/fs/dir-notify-enable "0"
-write /proc/sys/fs/lease-break-time "15"
-write /proc/sys/fs/aio-max-nr "131072"
+echo "0" > /proc/sys/fs/dir-notify-enable
+echo "15" > /proc/sys/fs/lease-break-time
+echo "131072" > /proc/sys/fs/aio-max-nr
 
 # Entropy config
 echo '64' > /proc/sys/kernel/random/read_wakeup_threshold
@@ -73,22 +73,10 @@ echo '64' > /proc/sys/kernel/random/write_wakeup_threshold
 
 
 # Scheduler features
-if [[ -f "/sys/kernel/debug/sched_features" ]]
-then
-	write /sys/kernel/debug/sched_features NEXT_BUDDY
-	write /sys/kernel/debug/sched_features NO_TTWU_QUEUE
-   write /sys/kernel/debug/sched_features NO_WAKEUP_PREEMPTION
-   write /sys/kernel/debug/sched_features NO_GENTLE_FAIR_SLEEPERS
-fi
-
-  # Blu-schedutil Tweaks
-  if [[ -d "${cpu}blu_schedutil" ]]
-  then
-    write "${cpu}blu_schedutil/up_rate_limit_us" 200
-	  write "${cpu}blu_schedutil/down_rate_limit_us" 4500
-    write "${cpu}blu_schedutil/hispeed_freq" `cat "${cpu}cpuinfo_max_freq"`
-  fi
-done
+echo "NEXT_BUDDY" > /sys/kernel/debug/sched_features
+echo "NO_TTWU"QUEUE" /sys/kernel/debug/sched_features
+echo "NO_WAKEUP_PREEMPTION" > /sys/kernel/debug/sched_features
+echo "NO_GENTLE_FAIR_SLEEPERS" > /sys/kernel/debug/sched_features
 
 
-dbg "Finished with $ERR_CNT failed writes."
+
