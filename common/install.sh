@@ -76,41 +76,6 @@ ui_print "- Android Version: $FCTEXTAD1 "
 sleep 0.5
 ui_print " "
 ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print "       Select Mode  📳     "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print " "
-ui_print "  Vol+ = Next; Vol- = Select"
-ui_print " "
-ui_print "  1. 🔋 Battery Mode "
-ui_print "  2. ⚖️ Balanced Mode "
-ui_print "  3. 🎮 Gaming Mode "
-ui_print " "
-ui_print "  Select: "
-ZT=1
-while true; do
-ui_print "   $ZT"
-	if $VKSEL; then
-		ZT=$((ZT + 1))
-	else 
-		break
-	fi
-	if [ $ZT -gt 3 ]; then
-		ZT=1
-	fi
-done
-ui_print " "
-ui_print "  Selected: $ZT"
-#
-case $ZT in
- 1 ) FCTEXTAD2="Battery"; cp -af $TMPDIR/mode/battery $MODPATH/system/bin;;
- 2 ) FCTEXTAD2="Balanced"; cp -af $TMPDIR/mode/balanced $MODPATH/system/bin;;
- 3 ) FCTEXTAD2="Gaming"; cp -af $TMPDIR/mode/gaming $MODPATH/system/bin; cp -af $TMPDIR/mode/autoperf $MODPATH/system/bin;;
-esac
-ui_print " "
-ui_print "- Mode: $FCTEXTAD2 "
-sleep 1
-ui_print " "
-ui_print "    ×××××××××××××××××××××××××××××××"
 ui_print "      You  Want Thermals for Redmi Note 7?   🚀     "
 ui_print "    ×××××××××××××××××××××××××××××××"
 ui_print " "
@@ -180,6 +145,7 @@ ui_print " "
 ui_print "    ×××××××××××××××××××××××××××××××"
 ui_print "     All Credits to AkiraSuper "
 ui_print "      SELinux Mode Changer        "
+ui_print "       Select Default for safety! "
 ui_print "    ×××××××××××××××××××××××××××××××"
 ui_print " "
 ui_print "  Vol+ = Next; Vol- = Select"
@@ -286,8 +252,8 @@ ui_print "    ×××××××××××××××××××××××××××××××××
 ui_print " "
 ui_print "  Vol+ = Next; Vol- = Select"
 ui_print " "
-ui_print "  1. Yes "
-ui_print "  2. No "
+ui_print "  1. ✅ Yes "
+ui_print "  2. ❌ No "
 ui_print " "
 ui_print "  Select: "
 UT=1
@@ -323,29 +289,5 @@ sleep 0.5
 ui_print " "
 ui_print " 🎮 𝗚𝗮𝗺𝗶𝗻𝗴 𝗮𝗻𝗱 𝗦𝗲𝗻𝘀𝗶𝘃𝗶𝘁𝘆 𝗶𝗺𝗽𝗿𝗼𝘃𝗲𝗱"
 sleep 0.5
-ui_print " "
-# Force Stope Some apps
-ui_print " 📲 Force Stopped Some Apps..."
-am force-stop com.facebook.lite
-am force-stop com.android.chrome
-am force-stop com.google.android.apps.docs
-am force-stop com.google.android.apps.photos
-ui_print " "
-sleep 0.5
-# Cleaner Junk Files
-ui_print " 🗑️ Cleaned JunkFiles..."
-busybox rm -f /data/local/tmp/* 2>/dev/null
-busybox rm -f /tmp/* 2>/dev/null
-busybox rm -f /data/*.log 2>/dev/null
-busybox rm -f /data/*.tmp
-busybox rm -f /cache/*.apk 2>/dev/null
-busybox rm -f /cache/*.tmp 2>/dev/null
-busybox rm -f /sdcard/LOST.DIR/* 2>/dev/null
-busybox rm -f /data/system/usagestats/* 2>/dev/null
-busybox rm -f /data/tombstones/* 2>/dev/null
-busybox rm -f /data/anr/* 2>/dev/null
-rm -f /data/dalvik-cache/*.apk
-rm -f /data/dalvik-cache/*.tmp
-busybox rm -f /data/system/userbehavior.db
 ui_print " "
 sleep 1

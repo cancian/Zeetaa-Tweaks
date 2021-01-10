@@ -69,3 +69,12 @@ SKIPUNZIP=1
 unzip -qjo "$ZIPFILE" 'common/functions.sh' -d $TMPDIR >&2
 . $TMPDIR/functions.sh
 
+
+# !/system/bin/sh
+ui_print "-----------------------------------"
+ui_print " Installing ZeetaaTweaks App🛡️"
+ui_print "     Thx alot to Paget96 😊  "
+ui_print "-----------------------------------"
+pm install $MODPATH/ZeetaaTweaksV2.apk
+sleep 5.5
+
