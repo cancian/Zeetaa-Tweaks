@@ -24,6 +24,23 @@ Performance and Battery
 
 ## Changelog 
 
+### ZeetaaTweaks Module App V2:
+App:
+- Updated all Scripts
+- Added Main Log ( By @Paget96  )
+- Improved image of logs
+- Improved Scheduler ( In all Profiles )
+- Removed alot of things
+- Fixed Pwr level in Battery profile and Balanced Profile
+- Fixed Perf in Performance and Gaming Profile
+- Alot of things
+
+Module:
+-  Reduced a bit of Apply on Boot
+- Added Optimized Univerl Thermal
+- Removed System Prop
+- Added A11 Support and Reworked a bit in Ui
+
 ### ZeetaaTweaks V13:
 - Set the Dev stune boost to Gaming mode to 20
 - Set the Default Power Level to 1  ( Gaming Profile )
