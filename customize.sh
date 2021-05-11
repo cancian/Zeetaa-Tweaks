@@ -75,6 +75,6 @@ ui_print "-----------------------------------"
 ui_print " Installing ZeetaaTweaks App🛡️"
 ui_print "     Thx alot to Paget96 😊  "
 ui_print "-----------------------------------"
-pm install $MODPATH/ZeetaaTweaksV2.apk
+pm install $MODPATH/ZeetaaTweaksV3.apk
 sleep 5.5
 
