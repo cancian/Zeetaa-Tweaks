@@ -1,0 +1,32 @@
+#!/system/bin/sh
+MODDIR=${0%/*}
+
+# Disabling Debug ( Reduces the Power Usage )
+# All Credits to @Bug_Founder_S10_S8 ( Nuked Dev )
+
+for debug in /sys/kernel/debug/tracing/events/*/enable
+do
+    write "$debug" "0"
+done
+for tracing in /sys/kernel/tracing/events/*/enable
+do
+    write "$tracing" "0"
+done
+
+write /sys/wifi/logtrace "0"
+write /sys/wifi/control_logtrace "0"
+write /sys/wifi/logdump_ecntr_enable "0"
+write /sys/power/pm_debug_messages "0"
+write /sys/kernel/debug/debug_enabled "N"
+write /sys/kernel/debug/seclog/seclog_debug "N"
+write /sys/kernel/debug/tracing/tracing_on "0"
+write /proc/sys/debug/exception-trace "0"
+write /d/tracing/tracing_on "0"
+write /sys/kernel/debug/sched_debug "N"
+write /proc/sys/dev/scsi/logging_level "0"
+write /sys/kernel/tracing/options/trace_printk "0"
+write /sys/module/printk/parameters/console_suspend "Y"
+write /sys/module/printk/parameters/ignore_loglevel "Y"
+write /sys/module/printk/parameters/time "N"
+write /proc/sys/kernel/printk "0 0 0 0"
+write /proc/sys/kernel/printk_devkmsg "off"

@@ -277,6 +277,43 @@ case $UT in
 esac
 ui_print " "
 ui_print "- Mode: $FCTEXTAD7 "
+
+ui_print " "
+ui_print "    ××××××××××××××××××××××××××××××××××××××××"
+ui_print "       You Want Debugging logs removed?  🔋     "
+ui_print "    ××××××××××××××××××××××××××××××××××××××××"
+ui_print "         Note: If u select yes will reduce 
+ui_print "         overhead without losing perf
+ui_print ".         Thx Alot to @Bug_Founder_S10_S8
+ui_print " "
+ui_print "  Vol+ = Next; Vol- = Select"
+ui_print " "
+ui_print "  1. ✅ Yes "
+ui_print "  2. ❌ No "
+ui_print " "
+ui_print "  Select: "
+DB=1
+while true; do
+ui_print "   $DB"
+	if $VKSEL; then
+		DB=$((DB + 1))
+	else 
+		break
+	fi
+	if [ $DB -gt 2 ]; then
+		DB=1
+	fi
+done
+ui_print " "
+ui_print "  Selected: $DB"
+#
+case $DB in
+ 1 ) FCTEXTAD8="Yes"; cp -af $TMPDIR/mode/debugging $MODPATH/system/bin;;
+ 2 ) FCTEXTAD8="No"; rm -rf $TMPDIR/mode/debugging;;
+esac
+ui_print ""
+ui_print "- Debugging Mode: $FCTEXTAD8"
+
 sleep 5
 
 sleep 1
