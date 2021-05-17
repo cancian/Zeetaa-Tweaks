@@ -285,9 +285,9 @@ ui_print " "
 ui_print "    ××××××××××××××××××××××××××××××××××××××××"
 ui_print "       You Want Debugging logs removed?  🔋     "
 ui_print "    ××××××××××××××××××××××××××××××××××××××××"
-ui_print "         Note: If u select yes will reduce 
-ui_print "         overhead without losing perf
-ui_print ".         Thx Alot to @Bug_Founder_S10_S8
+ui_print "         Note: If u select yes will reduce "
+ui_print "         overhead without losing perf "
+ui_print "         Thx Alot to @Bug_Founder_S10_S8 "
 ui_print " "
 ui_print "  Vol+ = Next; Vol- = Select"
 ui_print " "
