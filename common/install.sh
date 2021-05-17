@@ -15,6 +15,9 @@ ui_print " "
 ui_print "📱Processor : $(getprop ro.product.board) "
 sleep 0.2
 ui_print " "
+ui_print "📱 Kernel Name : $(cat /proc/version) "
+sleep 0.2
+ui_print " "
 ui_print "📱Arm Version : $(getprop ro.product.cpu.abi) "
 sleep 0.2
 ui_print " "
