@@ -6,7 +6,7 @@ ui_print " /____| |_| |____/ "
 ui_print "                           "
 sleep 0.2
 ui_print " "
-ui_print "The ZeetaaTweaks unlocks the full power ⚡ of all Devices"
+ui_print "The ZeetaaTweaks for all Devices"
 sleep 0.2
 ui_print " "
 ui_print "👨‍💻 Checking Phone Information "
@@ -15,7 +15,7 @@ ui_print " "
 ui_print "📱Processor : $(getprop ro.product.board) "
 sleep 0.2
 ui_print " "
-ui_print "📱 Kernel Name : $(cat /proc/version) "
+ui_print "📱 Kernel Name : $(uname -r) "
 sleep 0.2
 ui_print " "
 ui_print "📱Arm Version : $(getprop ro.product.cpu.abi) "
