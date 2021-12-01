@@ -32,8 +32,6 @@ sleep 0.5
 ui_print " "
 ui_print "- Extracting module files"
 unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
-unzip -o "$ZIPFILE" 'lavender/*' -d $TMPDIR >&2
-unzip -o "$ZIPFILE" 'audio/*' -d $TMPDIR >&2
 unzip -o "$ZIPFILE" 'gmszt/*' -d $TMPDIR >&2
 unzip -o "$ZIPFILE" 'mode/*' -d $TMPDIR >&2
 mkdir -p $MODPATH/system/bin
@@ -76,110 +74,6 @@ case $AV in
 esac
 ui_print " "
 ui_print "- Android Version: $FCTEXTAD1 "
-sleep 0.5
-ui_print " "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print "      You  Want Thermals for Redmi Note 7?   🚀     "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print " "
-ui_print "  Vol+ = Next; Vol- = Select"
-ui_print " "
-ui_print "  1. ✅ Yes "
-ui_print "  2. ❌ No "
-ui_print " "
-ui_print "  Select: "
-TH=1
-while true; do
-ui_print "   $TH"
-	if $VKSEL; then
-		TH=$((TH + 1))
-	else 
-		break
-	fi
-	if [ $TH -gt 2 ]; then
-		TH=1
-	fi
-done
-ui_print " "
-ui_print "  Selected: $TH"
-#
-case $TH in
- 1 ) FCTEXTAD3="Enable"; cp -af $TMPDIR/lavender/* $MODPATH/system;;
- 2 ) FCTEXTAD3="Disable"; rm -rf $TMPDIR/lavender;;
-esac
-ui_print " "
-ui_print "- Thermal Engine Mode: $FCTEXTAD3 "
-sleep 0.5
-ui_print " "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print "          Credits To Masik Miui "
-ui_print "      You Want Masik Pulse Audio?   🔊     "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print " "
-ui_print "  Vol+ = Next; Vol- = Select"
-ui_print " "
-ui_print "  1. ✅ Yes ( Lavender ONLY ) "
-ui_print "  2. ❌ No "
-ui_print " "
-ui_print "  Select: "
-AD=1
-while true; do
-ui_print "   $AD"
-	if $VKSEL; then
-		AD=$((AD + 1))
-	else 
-		break
-	fi
-	if [ $AD -gt 2 ]; then
-		AD=1
-	fi
-done
-ui_print " "
-ui_print "  Selected: $AD"
-#
-case $AD in
- 1 ) FCTEXTAD4="Enable"; cp -af $TMPDIR/audio/* $MODPATH/system;;
- 2 ) FCTEXTAD4="Disable"; rm -rf $TMPDIR/audio;;
-esac
-ui_print " "
-ui_print "- Sound Mode: $FCTEXTAD4"
-sleep 0.5
-ui_print " "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print "     All Credits to AkiraSuper "
-ui_print "      SELinux Mode Changer        "
-ui_print "       Select Default for safety! "
-ui_print "    ×××××××××××××××××××××××××××××××"
-ui_print " "
-ui_print "  Vol+ = Next; Vol- = Select"
-ui_print " "
-ui_print "  1. Enforcing"
-ui_print "  2. Permissive"
-ui_print "  3. Default"
-ui_print " "
-ui_print "  Select: "
-SL=1
-while true; do
-ui_print "   $SL"
-	if $VKSEL; then
-		SL=$((SL + 1))
-	else 
-		break
-	fi
-	if [ $SL -gt 3 ]; then
-		SL=1
-	fi
-done
-ui_print ""
-ui_print "  SELinux Mode: $SL"
-#
-case $SL in
-	1 ) FCTEXTAD5="Enforcing"; sed -i "s/<SELINUX_MODE>/1/g" $MODPATH/post-fs-data.sh;;
-	2 ) FCTEXTAD5="Permissive"; sed -i "s/<SELINUX_MODE>/0/g" $MODPATH/post-fs-data.sh;;
-	3 ) FCTEXTAD5="Default"; sed -i "s/<SELINUX_MODE>/<SELINUX_MODE>/g" $MODPATH/post-fs-data.sh;;
-esac
-ui_print ""
-ui_print "- SELinux Mode: $FCTEXTAD5"
 sleep 0.5
 ui_print " "
 ui_print "    ×××××××××××××××××××××××××××××××"
